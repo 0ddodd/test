@@ -7,6 +7,7 @@ function searchForm({setInfoItem}) {
 
     const handleSubmit = async () => {
         try {
+            if (keyword === "") return;
             const resp = await axios.get(`${import.meta.env.VITE_API_BACKEND_URL}/contact/${keyword}`);
             console.log(resp.data.msg);
             setInfoItem(resp.data.items.item[0]);
