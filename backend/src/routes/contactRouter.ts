@@ -1,7 +1,7 @@
 import express from 'express';
-import { getContacts } from '../controllers/contactController';
+import { searchContacts } from '../controllers/contactController';
 
 const contactRouter = express.Router();
-contactRouter.get("/", getContacts);
+contactRouter.get("/:keyword", searchContacts);
 
 export default contactRouter;
