@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import InputForm from '../components/inputForm'
+import SearchForm from '../components/searchForm'
 import axios from 'axios';
 
 interface InfoItem {
@@ -16,31 +16,32 @@ function MainPage () {
     const [infoItem, setInfoItem] = useState<InfoItem | null>(null);
 
     useEffect(() => {
-        console.log(import.meta.env.VITE_API_BACKEND_URL)
-        getData();
+        // getData();
+        console.log(infoItem);
+
     }, []);
 
-    const getData = async () => {
-        // 실험용
-        try {
-            const res = await axios.get(`${import.meta.env.VITE_API_BACKEND_URL}/contact`);
-            console.log(res.data.msg);
-            setInfoItem(res.data.items.item[0]);
-        } catch (err) {
-            console.error(err);
-        }
-    }
+    useEffect(() => {
+        // getData();
+        console.log(infoItem);
+    }, [infoItem]);
 
     return (
         <div>
-            {infoItem && <div>
-                <h2>{infoItem.country_nm}</h2>
-                <img src={infoItem.flag_download_url} alt="country flag" />
-                <h3>{infoItem.country_eng_nm}</h3>
-                <div dangerouslySetInnerHTML={{ __html: infoItem.contact_remark }} />
-                <img src={infoItem.dang_map_download_url} alt="" />
-            </div>}
-            {/* <InputForm /> */}
+            <SearchForm setInfoItem={setInfoItem} />
+            <div>
+                {infoItem ? 
+                    <>
+                        <h2>{infoItem.country_nm}</h2>
+                        <img src={infoItem.flag_download_url} alt="country flag" />
+                        <h3>{infoItem.country_eng_nm}</h3>
+                        <div dangerouslySetInnerHTML={{ __html: infoItem.contact_remark }} />
+                        <img src={infoItem.dang_map_download_url} alt="country map" />
+                    </>
+                :
+                    <p>해당하는 국가가 없습니다.</p>
+                }
+            </div>
         </div>
     )
 }
