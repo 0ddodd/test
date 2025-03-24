@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import SearchForm from '../components/searchForm'
 import axios from 'axios';
-
-interface InfoItem {
-    country_nm: string;
-    country_eng_nm: string;
-    contact_remark: string;
-    flag_download_url: string;
-    dang_map_download_url: string;
-    [key: string]: string;
-}
+import { InfoItem } from '../types/infoItem';
 
 function MainPage () {
 
@@ -19,6 +11,7 @@ function MainPage () {
         try {
             console.log(infoItem);
             const resp = await axios.post(`${import.meta.env.VITE_API_BACKEND_URL}/post`, infoItem);
+            alert(resp.data.msg);
             console.log(resp.data.msg);
         } catch (err) {
             if (axios.isAxiosError(err)) {
