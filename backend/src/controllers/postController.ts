@@ -28,9 +28,10 @@ export const addPost = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-export const getPost = async (req: Request, res: Response) => {
+export const getPosts = async (req: Request, res: Response) => {
     try {
-
+        const posts = await Post.find();
+        res.status(200).send(posts);
     } catch (err) {
         res.send(err);
     }
