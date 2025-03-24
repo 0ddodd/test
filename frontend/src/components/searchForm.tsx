@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 function searchForm({setInfoItem}) {
     
-    const [keyword, setKeyword] = useState("");
+    const [keyword, setKeyword] = useState<string>("");
 
     const handleSubmit = async () => {
         try {

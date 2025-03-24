@@ -1,6 +1,6 @@
 import NavBar from './components/navbar'
 import MainPage from './views/mainPage'
-import PostPage from './views/postPage'
+import PostsPage from './views/postsPage'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -11,7 +11,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<MainPage />}/>
-          <Route path="/posts" element={<PostPage />} />
+          <Route path="/posts" element={<PostsPage />} />
+          {/* <Route path="/posts" element={<PostPage />} /> */}
         </Routes>
       </div>
     </Router>

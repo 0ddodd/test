@@ -21,7 +21,13 @@ function MainPage () {
             const resp = await axios.post(`${import.meta.env.VITE_API_BACKEND_URL}/post`, infoItem);
             console.log(resp.data.msg);
         } catch (err) {
-            console.error(err)
+            if (axios.isAxiosError(err)) {
+                alert(err.response?.data.error)
+                // 이미 존재하는 국가입니다.
+                // console.error('Axios Error: ', err.response?.data.error);
+            } else {
+                console.error('알 수 없는 에러: ', err);
+            }
         }
     }
 
