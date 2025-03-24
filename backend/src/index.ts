@@ -3,10 +3,14 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import contactRouter from './routes/contactRouter';
 import postRouter from './routes/postRouter';
+import connectDB from './database/db';
 
 dotenv.config();
 
 const app = express();
+
+// mongodb 연결
+connectDB();
 
 app.use(cors());
 app.use(express.json());
