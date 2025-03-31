@@ -26,7 +26,7 @@ export const addPost = async (req: Request, res: Response): Promise<void> => {
     } catch (err) {
         res.send(err);
     }
-}
+};
 
 export const getPosts = async (req: Request, res: Response) => {
     try {
@@ -35,4 +35,13 @@ export const getPosts = async (req: Request, res: Response) => {
     } catch (err) {
         res.send(err);
     }
-} 
+};
+
+export const getPost = async (req: Request, res: Response) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        res.status(200).send(post);
+    } catch (err) {
+        res.send(err);
+    }
+}
