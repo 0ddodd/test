@@ -44,4 +44,16 @@ export const getPost = async (req: Request, res: Response) => {
     } catch (err) {
         res.send(err);
     }
-}
+};
+
+export const deletePost = async (req: Request, res: Response) => {
+    try {
+        const post = await Post.findByIdAndDelete(req.params.id);
+        res.status(200).send({
+            msg: "성공적으로 삭제되었습니다",
+            post
+        });
+    } catch (err) {
+        res.send(err);
+    }
+};
