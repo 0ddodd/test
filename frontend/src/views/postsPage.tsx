@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { InfoItem } from '../types/infoItem';
+import { useNavigate } from 'react-router-dom';
 
 
 function postsPage() {
 
     const [posts, setPosts] = useState<InfoItem[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         getPosts();
@@ -22,15 +24,7 @@ function postsPage() {
             {posts.length > 0 ?
                 posts.map(post => 
                     <div key={post._id}>
-                        <h2>{post.country_nm}</h2>
-                        <div>
-                            <textarea name="" id=""></textarea>
-                        </div>
-                        <img src={post.flag_download_url} alt="country flag" />
-                        <h3>{post.country_eng_nm}</h3>
-                        <div dangerouslySetInnerHTML={{ __html: post.contact_remark }} />
-                        <img src={post.dang_map_download_url} alt="country map" />
-                    
+                        <button onClick={()=>navigate(`/post/${post._id}`)}>{post.country_nm}</button>
                     </div>
                 )
             :

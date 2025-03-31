@@ -5,7 +5,6 @@ import LoginForm from '../components/loginForm'
 function LoginPage() {
 
     const [isLogin, setIsLogin] = useState(true);
-    useEffect(() => {console.log(isLogin)}, [isLogin])
 
     return (
         <div>

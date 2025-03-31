@@ -6,6 +6,7 @@ import PostsPage from './views/postsPage'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { onAuthStateChanged, User } from 'firebase/auth'
 import { auth } from './auth/firebase'
+import PostDetail from './views/postDetail'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/" element={user ? <MainPage /> : <Navigate to="/login" />}/>
           <Route path="/login" element={user ? <Navigate to="/" /> : <LoginPage />} />
           <Route path="/posts" element={user ? <PostsPage /> : <Navigate to="/login" />} />
+          <Route path="/post/:id" element={user ? <PostDetail /> : <Navigate to="/login" />} />
           <Route path="*" element={<Navigate to="/" />} />
           {/* <Route path="/posts" element={<PostPage />} /> */}
         </Routes>
