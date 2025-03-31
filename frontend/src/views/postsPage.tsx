@@ -23,10 +23,14 @@ function postsPage() {
                 posts.map(post => 
                     <div key={post._id}>
                         <h2>{post.country_nm}</h2>
+                        <div>
+                            <textarea name="" id=""></textarea>
+                        </div>
                         <img src={post.flag_download_url} alt="country flag" />
                         <h3>{post.country_eng_nm}</h3>
                         <div dangerouslySetInnerHTML={{ __html: post.contact_remark }} />
                         <img src={post.dang_map_download_url} alt="country map" />
+                    
                     </div>
                 )
             :

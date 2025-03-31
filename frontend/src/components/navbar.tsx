@@ -1,16 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { logout } from "../services/authService";
+import { auth } from "../auth/firebase";
+import { onAuthStateChanged, User } from "firebase/auth";
 
 function NavBar() {
+
+    const [user, setUser] = useState<User | null>(null);
+    const onLogout = async () => {
+        const confirmed = window.confirm('정말 로그아웃 하시겠습니까?');
+        if (confirmed) {
+            try {
+                const resp = await logout();
+                console.log(resp);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+    };
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+
+            if(currentUser) {
+
+            } else {
+
+            };
+        });
+
+        return () => unsubscribe();
+    }, []);
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
                 <Link to='/'>
                     Navbar
                 </Link>
-                <Link to="/posts">
-                    <button>마이페이지</button>
-                </Link>
+                {user &&
+                    <div>
+                        <Link to="/posts">
+                            <button>마이페이지</button>
+                        </Link>
+                        <button onClick={onLogout}>로그아웃</button>
+                    </div>
+                    }
                 {/* <button
                     className="navbar-toggler"
                     type="button"
