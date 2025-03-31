@@ -18,6 +18,13 @@ function postsPage() {
         console.log(resp);
         setPosts(resp.data);
     };
+
+    const onDeletePost = async (id: string) => {
+        const resp = await axios.delete(`${import.meta.env.VITE_API_BACKEND_URL}/post/${id}`);
+        alert(resp.data.msg);
+        const leftPosts = posts.filter(post => post._id !== id);
+        setPosts(leftPosts); 
+    };
     
     return (
         <div>
@@ -25,6 +32,7 @@ function postsPage() {
                 posts.map(post => 
                     <div key={post._id}>
                         <button onClick={()=>navigate(`/post/${post._id}`)}>{post.country_nm}</button>
+                        <button onClick={()=>onDeletePost(post._id)}>x</button>
                     </div>
                 )
             :
