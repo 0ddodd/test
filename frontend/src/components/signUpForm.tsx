@@ -3,8 +3,8 @@ import { signUp } from '../services/authService';
 
 function SignUpForm () {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
     const onSignUp = async () => {
         try {

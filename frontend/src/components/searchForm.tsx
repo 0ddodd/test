@@ -11,15 +11,12 @@ function searchForm({setInfoItem}) {
             const resp = await axios.get(`${import.meta.env.VITE_API_BACKEND_URL}/contact/${keyword}`);
             console.log(resp.data.msg);
             const email = localStorage.getItem('user_info');
-            console.log(email);
             const item = {
                 ...resp.data.items.item[0],
-                comments: "",
-                user: JSON.parse(email)
+                comments: [],
+                user: JSON.parse(email || "")
             };
-            console.log(item);
             setInfoItem(item);
-            // setInfoItem(resp.data.items.item[0]);
             setKeyword("");
         } catch (err) {
             console.error(err);
