@@ -12,6 +12,7 @@ function NavBar() {
         if (confirmed) {
             try {
                 const resp = await logout();
+                localStorage.removeItem("user_info");
                 console.log(resp);
             } catch (err) {
                 console.error(err);

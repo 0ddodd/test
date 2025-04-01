@@ -28,6 +28,7 @@ function PostDetail() {
                     <h2>{post.country_nm}</h2>
                     <div>
                         <textarea name="" id=""></textarea>
+                        <button>저장</button>
                     </div>
                     <img src={post.flag_download_url} alt="country flag" />
                     <h3>{post.country_eng_nm}</h3>

@@ -12,6 +12,7 @@ function LoginForm() {
         try {
             const resp = await login(email, password);
             alert(`${resp.email}님이 로그인에 성공하였습니다.`);
+            localStorage.setItem("user_info", JSON.stringify({email}));
             navigate("/");
             console.log(resp);
         } catch (err) {
