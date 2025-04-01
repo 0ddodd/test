@@ -75,13 +75,10 @@ export const updatePost = async (req: Request, res: Response) => {
         if (!post) {
             res.status(404).send({msg: "게시글을 찾을 수 없습니다"})
         } else {
-            console.log(req.body);
             post.comments = req.body.comments;
-            console.log(post);
-            // post.comments.push({comment: req.body.comment});
             await post.save();
     
-            res.status(200).send({msg: "댓글이 추가되었습니다", post});
+            res.status(200).send({msg: "댓글이 업데이트 되었습니다", post});
         };
     } catch (err) {
         res.send(err);

@@ -14,7 +14,10 @@ const postSchema = new Schema({
     map_download_url: { type: String },
     wrt_dt: { type: String },
     comments: [
-        {comment: { type: String }}
+        {
+            comment: { type: String },
+            createdAt: { type: Date, default: Date.now }
+        }
     ],
     user: {
         email: { type: String, required: true }
