@@ -13,7 +13,10 @@ const postSchema = new Schema({
     country_iso_alp2: {type: String},
     map_download_url: { type: String},
     wrt_dt: { type: String },
-    comments: { type: String }
+    comments: { type: String },
+    user: {
+        email: { type: String, required: true }
+    }
 }, { timestamps: true });
 
 export const Post = model('Post', postSchema);

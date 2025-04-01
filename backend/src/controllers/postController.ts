@@ -14,13 +14,16 @@ export const addPost = async (req: Request, res: Response): Promise<void> => {
             return;
         }
         
-        const obj = {...req.body, comments: ""};
-        const newPost = new Post(obj);
+        console.log(req.body);
+        // const obj = {...req.body, comments: ""};
+        // const newPost = new Post(obj);
+        const newPost = new Post(req.body);
         
         await newPost.save();
         res.status(200).send({
             msg: "성공적으로 저장되었습니다.",
-            item: obj
+            item: req.body
+            // item: obj
         });
 
     } catch (err) {
