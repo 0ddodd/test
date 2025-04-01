@@ -10,10 +10,12 @@ const postSchema = new Schema({
     continent_cd: { type: String },
     continent_eng_nm: { type: String },
     continent_nm:  { type: String },
-    country_iso_alp2: {type: String},
-    map_download_url: { type: String},
+    country_iso_alp2: {type: String },
+    map_download_url: { type: String },
     wrt_dt: { type: String },
-    comments: { type: String },
+    comments: [
+        {comment: { type: String }}
+    ],
     user: {
         email: { type: String, required: true }
     }

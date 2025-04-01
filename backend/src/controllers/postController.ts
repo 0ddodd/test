@@ -14,16 +14,13 @@ export const addPost = async (req: Request, res: Response): Promise<void> => {
             return;
         }
         
-        console.log(req.body);
-        // const obj = {...req.body, comments: ""};
-        // const newPost = new Post(obj);
         const newPost = new Post(req.body);
         
         await newPost.save();
+
         res.status(200).send({
             msg: "성공적으로 저장되었습니다.",
             item: req.body
-            // item: obj
         });
 
     } catch (err) {
@@ -34,6 +31,9 @@ export const addPost = async (req: Request, res: Response): Promise<void> => {
 export const getPosts = async (req: Request, res: Response) => {
     try {
         const posts = await Post.find();
+        if (!posts) {
+            res.status(404).send({msg: "게시글을 찾을 수 없습니다"})
+        }
         res.status(200).send(posts);
     } catch (err) {
         res.send(err);
@@ -43,6 +43,10 @@ export const getPosts = async (req: Request, res: Response) => {
 export const getPost = async (req: Request, res: Response) => {
     try {
         const post = await Post.findById(req.params.id);
+        if (!post) {
+            res.status(404).send({msg: "게시글을 찾을 수 없습니다"})
+        }
+
         res.status(200).send(post);
     } catch (err) {
         res.send(err);
@@ -52,6 +56,10 @@ export const getPost = async (req: Request, res: Response) => {
 export const deletePost = async (req: Request, res: Response) => {
     try {
         const post = await Post.findByIdAndDelete(req.params.id);
+        if (!post) {
+            res.status(404).send({msg: "게시글을 찾을 수 없습니다"})
+        }
+
         res.status(200).send({
             msg: "성공적으로 삭제되었습니다",
             post
@@ -60,3 +68,22 @@ export const deletePost = async (req: Request, res: Response) => {
         res.send(err);
     }
 };
+
+export const updatePost = async (req: Request, res: Response) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        if (!post) {
+            res.status(404).send({msg: "게시글을 찾을 수 없습니다"})
+        } else {
+            console.log(req.body);
+            post.comments = req.body.comments;
+            console.log(post);
+            // post.comments.push({comment: req.body.comment});
+            await post.save();
+    
+            res.status(200).send({msg: "댓글이 추가되었습니다", post});
+        };
+    } catch (err) {
+        res.send(err);
+    }
+}
