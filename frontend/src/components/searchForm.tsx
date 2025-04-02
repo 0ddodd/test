@@ -1,7 +1,12 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { InfoItem } from '../types/infoItem';
 
-function searchForm({setInfoItem}) {
+interface serachFormProps {
+    setInfoItem: (item: InfoItem) => void;
+};
+
+function searchForm({setInfoItem}: serachFormProps) {
     
     const [keyword, setKeyword] = useState<string>("");
 

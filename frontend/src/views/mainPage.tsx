@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import SearchForm from '../components/searchForm'
 import axios from 'axios';
 import { InfoItem } from '../types/infoItem';

@@ -1,7 +1,13 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { InfoItem } from '../types/infoItem';
 
-function PostComment({id, post}) {
+export interface PostCommentProps {
+    id: string;
+    post: InfoItem
+};
+
+function PostComment({id, post}: PostCommentProps) {
 
     const [comment, setComment] = useState<string>("");
     const [comments, setComments] = useState<{

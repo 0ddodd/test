@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { InfoItem } from '../types/infoItem';
 import PostComment from '../components/postComment';
@@ -27,7 +27,7 @@ function PostDetail() {
             {post && 
                 <div>
                     <h2>{post.country_nm}</h2>
-                    <PostComment id={id} post={post}/>
+                    <PostComment id={id!} post={post}/>
                     <img src={post.flag_download_url} alt="country flag" />
                     <h3>{post.country_eng_nm}</h3>
                     <div dangerouslySetInnerHTML={{ __html: post.contact_remark }} />

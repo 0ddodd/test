@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { signUp } from '../services/authService';
 
 function SignUpForm () {
