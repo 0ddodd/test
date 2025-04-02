@@ -23,5 +23,4 @@ app.use(express.json());
 app.use("/post", postRouter);
 app.use("/contact", contactRouter);
 
-app.get("/", (req: Request, res: Response) => console.log('hi'))
 app.listen(process.env.PORT, () => console.log(`Listening on ${process.env.PORT}`));
