@@ -12,7 +12,12 @@ const app = express();
 // mongodb 연결
 connectDB();
 
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+    origin: 'https://marvelous-granita-ea2705.netlify.app',
+    credentials: true
+}));
+
 app.use(express.json());
 
 app.use("/post", postRouter);
