@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { logout } from "../services/authService";
 import { auth } from "../auth/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
+import CustomButton from "./customButton";
 
 function NavBar() {
 
@@ -38,14 +39,17 @@ function NavBar() {
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
                 <Link to='/'>
-                    Navbar
+                    <i className="bi bi-map text-dark fs-5"></i>
                 </Link>
                 {user &&
                     <div>
                         <Link to="/posts">
-                            <button>마이페이지</button>
+                            <CustomButton text="마이페이지" />
                         </Link>
-                        <button onClick={onLogout}>로그아웃</button>
+                        <CustomButton
+                            text="로그아웃"
+                            onClick={onLogout}
+                        />
                     </div>
                     }
                 {/* <button

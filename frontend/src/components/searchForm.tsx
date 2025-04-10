@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react'
 import { InfoItem } from '../types/infoItem';
+import CustomButton from './customButton';
 
 interface serachFormProps {
     setInfoItem: (item: InfoItem) => void;
@@ -31,11 +32,14 @@ function searchForm({setInfoItem}: serachFormProps) {
     return (
         <form className="mb-5" onSubmit={(e) => e.preventDefault()}>
             <input
+                className="form-control mt-3"
                 type="text"
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)} 
             />
-            <button onClick={handleSubmit}>검색</button>
+            <button onClick={handleSubmit} className='btn p-0 border-0 bg-transparent'>
+                <i className="bi bi-search"></i>
+            </button>
         </form>
     )
 }
