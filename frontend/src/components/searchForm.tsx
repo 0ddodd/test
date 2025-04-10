@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react'
 import { InfoItem } from '../types/infoItem';
-import CustomButton from './customButton';
 
 interface serachFormProps {
     setInfoItem: (item: InfoItem) => void;
