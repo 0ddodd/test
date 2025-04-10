@@ -29,17 +29,21 @@ function searchForm({setInfoItem}: serachFormProps) {
     }
 
     return (
-        <form className="mb-5" onSubmit={(e) => e.preventDefault()}>
-            <input
-                className="form-control mt-3"
-                type="text"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)} 
-            />
-            <button onClick={handleSubmit} className='btn p-0 border-0 bg-transparent'>
-                <i className="bi bi-search"></i>
-            </button>
-        </form>
+        <div className='d-flex justify-content-center mt-5'>
+            <div className="position-relative mb-5 w-75" onSubmit={(e) => e.preventDefault()}>
+                <input
+                    className="form-control"
+                    type="text"
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)} 
+                />
+                <button
+                    onClick={handleSubmit}
+                    className='btn position-absolute top-50 end-0 translate-middle-y me-3 p-0 border-0 bg-transparent'>
+                    <i className="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
     )
 }
 
