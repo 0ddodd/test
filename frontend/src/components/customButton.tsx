@@ -1,9 +1,9 @@
 
-function CustomButton({text, onClick}: {text: string, onClick?: ()=>void}) {
+function CustomButton({text, bg, onClick}: {text: string, bg?: string, onClick?: ()=>void}) {
     return (
         <button
             onClick={onClick}
-            className="btn btn-light"
+            className={`btn btn-${bg ? bg : 'light'}`}
         >
             {text}
         </button>

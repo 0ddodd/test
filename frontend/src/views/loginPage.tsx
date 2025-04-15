@@ -13,7 +13,7 @@ function LoginPage() {
             :
                 <SignUpForm />
             }
-            <p onClick={()=>setIsLogin(!isLogin)}>
+            <p className="text-decoration-underline text-center mt-3" onClick={()=>setIsLogin(!isLogin)}>
                 {isLogin ? "회원가입" : "로그인"}
             </p>
         </div>

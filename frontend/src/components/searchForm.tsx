@@ -3,10 +3,11 @@ import { useState } from 'react'
 import { InfoItem } from '../types/infoItem';
 
 interface serachFormProps {
-    setInfoItem: (item: InfoItem) => void;
+    setInfoItem: (item: InfoItem | null) => void;
+    setSearchWord: (value: string) => void;
 };
 
-function searchForm({setInfoItem}: serachFormProps) {
+function searchForm({setInfoItem, setSearchWord}: serachFormProps) {
     
     const [keyword, setKeyword] = useState<string>("");
 
@@ -15,13 +16,21 @@ function searchForm({setInfoItem}: serachFormProps) {
             if (keyword === "") return;
             const resp = await axios.get(`${import.meta.env.VITE_API_BACKEND_URL}/contact/${keyword}`);
             console.log(resp.data.msg);
+            console.log(resp.data);
             const email = localStorage.getItem('user_info');
-            const item = {
-                ...resp.data.items.item[0],
-                comments: [],
-                user: JSON.parse(email || "")
-            };
-            setInfoItem(item);
+            if (resp.data.items.item.length > 0) {
+                const item = {
+                    ...resp.data.items.item[0],
+                    comments: [],
+                    user: JSON.parse(email || "")
+                };
+                setSearchWord(keyword);
+                setInfoItem(item);
+            } else {
+                console.log('검색 결과 없음');
+                setSearchWord(keyword);
+                setInfoItem(null);
+            }
             setKeyword("");
         } catch (err) {
             console.error(err);
@@ -29,8 +38,8 @@ function searchForm({setInfoItem}: serachFormProps) {
     }
 
     return (
-        <div className='d-flex justify-content-center mt-5'>
-            <div className="position-relative mb-5 w-75" onSubmit={(e) => e.preventDefault()}>
+        <div className="w-50">
+            <form className="position-relative m-3" onSubmit={(e) => e.preventDefault()}>
                 <input
                     className="form-control"
                     type="text"
@@ -42,7 +51,7 @@ function searchForm({setInfoItem}: serachFormProps) {
                     className='btn position-absolute top-50 end-0 translate-middle-y me-3 p-0 border-0 bg-transparent'>
                     <i className="bi bi-search"></i>
                 </button>
-            </div>
+            </form>
         </div>
     )
 }

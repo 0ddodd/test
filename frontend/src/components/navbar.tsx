@@ -4,13 +4,22 @@ import { logout } from "../services/authService";
 import { auth } from "../auth/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import CustomButton from "./customButton";
+import Swal from "sweetalert2";
 
 function NavBar() {
 
     const [user, setUser] = useState<User | null>(null);
     const onLogout = async () => {
-        const confirmed = window.confirm('정말 로그아웃 하시겠습니까?');
-        if (confirmed) {
+
+        const result = await Swal.fire({
+            title:  `<span style="font-size: 16px;">정말 로그아웃 하시겠습니까?</span>`,
+            showCancelButton: true,
+            confirmButtonText: 'YES',
+            cancelButtonText: 'NO',
+            confirmButtonColor: '#3085d6',
+        })
+    
+        if (result.isConfirmed) {
             try {
                 const resp = await logout();
                 localStorage.removeItem("user_info");
@@ -18,7 +27,9 @@ function NavBar() {
             } catch (err) {
                 console.error(err);
             }
-        };
+        } else {
+            console.log('로그아웃 취소');
+        }
     };
 
     useEffect(() => {
@@ -44,86 +55,17 @@ function NavBar() {
                 {user &&
                     <div>
                         <Link to="/posts">
-                            <CustomButton text="마이페이지" />
+                            <CustomButton
+                                text="마이페이지"
+                            />
                         </Link>
                         <CustomButton
                             text="로그아웃"
                             onClick={onLogout}
                         />
                     </div>
-                    }
-                {/* <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button> */}
-                {/* <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">
-                                Home
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Link
-                            </a>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <a
-                                className="nav-link dropdown-toggle"
-                                href="#"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                            >
-                            Dropdown
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li>
-                                    <a className="dropdown-item" href="#">
-                                        Action
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className="dropdown-item" href="#">
-                                        Another action
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li>
-                                    <a className="dropdown-item" href="#">
-                                        Something else here
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link disabled" aria-disabled="true">
-                                Disabled
-                            </a>
-                        </li>
-                    </ul>
-                <form className="d-flex" role="search">
-                    <input
-                        className="form-control me-2"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
-                    />
-                    <button className="btn btn-outline-success" type="submit">
-                        Search
-                    </button>
-                </form>
-                </div> */}
+                }
+                
             </div>
         </nav>
     );
