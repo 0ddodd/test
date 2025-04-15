@@ -5,8 +5,13 @@ import PostDetail from './views/postDetail'
 import PostsPage from './views/postsPage'
 import { ToastContainer } from 'react-toastify'
 import LoginPage from './views/loginPage'
+import { User } from 'firebase/auth'
 
-function AppRouter({user}) {
+interface AppRouterProps {
+    user: User | null;
+}
+
+function AppRouter({user}:AppRouterProps) {
     
     const location = useLocation();
     const isLoginPage = location.pathname === '/login';

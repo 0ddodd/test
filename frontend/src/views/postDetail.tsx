@@ -10,6 +10,7 @@ function PostDetail() {
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
+        console.log(showModal && showModal);
         getPost();
     }, []);
 
